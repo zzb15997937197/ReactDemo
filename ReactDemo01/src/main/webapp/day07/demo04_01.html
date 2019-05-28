@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>React验证器</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/prop-types/15.6.1/prop-types.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+</head>
+<body> 
+        <!--
+           1.对象类型,传入为对象类型
+         -->
+          <div id="example"></div>
+          <div id="example1"></div>
+           <script type="text/babel">
+               var  car={type:"宝马",model:"911",color:"白色"};
+              var number="1";   //验证是否为其中的一个
+              class MyObject extends React.Component{
+               
+               render(){
+                  return(
+                       <h2>这是{this.props.car.type}车,它的型号是{this.props.car.model},它有着{this.props.car.color}的外衣</h2>
+                  )
+              }   
+           }
+             //添加验证
+              MyObject.propTypes={
+                  car:PropTypes.object.isRequired
+             }
+           
+
+            ReactDOM.render(
+                 <MyObject car={car} />,
+                 document.getElementById("example")
+           )
+           
+        </script>
+         
+           <!--  验证props是否是指定元素中的某个-->
+          <script type="text/babel">
+           
+           class MyNumber extends React.Component{
+             render(){
+                return(
+                     <h2>只能从1，2，3中选一个，{this.props.number} </h2>
+               )
+            }
+        }
+         MyNumber.propTypes={
+                  number:PropTypes.oneOf(["1","2","3"])
+       }
+ 
+         ReactDOM.render(
+                 <MyNumber number={number} />,
+                 document.getElementById("example1")
+           )
+ 
+     
+         </script>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>复习state的生命周期,写一个定时器</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+</head>
+<body>
+     <div id="example"></div>
+      
+      <script type="text/babel">
+       class Mytime extends React.Component{
+        
+       constructor(props){
+          super(props);
+          this.state={date:new Date()}
+       }
+
+    //   componentDidMount(){
+     //     let that=this;
+       //   this.timerId=setInterval(function(){
+      //      return that.tick();
+      //    },1000)
+    //   }
+          //componentDidMount(){
+          //   this.timerId=setInterval(()=>tick(),1000)
+      //    }
+      //默认是不绑定this的
+          componentDidMount(){
+          this.timerId=setInterval(
+                 this.tick.bind(this) ,1000)
+          }
+
+       tick(){
+         this.setState({date:new Date()})
+       }
+
+       componentWillUnmout(){
+            clearInterval(this.timerId);
+       }
+        
+      render(){
+       return(
+           <div>  
+              <h1>Hello,world</h1>
+              <h2> 现在是 {this.state.date.toLocaleTimeString()} </h2>
+           </div>
+     );
+     }
+  
+    }
+
+      ReactDOM.render(
+         <Mytime />,
+         document.getElementById("example")
+     )
+
+
+      </script>
+
+</body>
+</html>

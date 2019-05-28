@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Import和Export的应用</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+  <script type="text/babel" src="../js/main.js"></script>
+</head>
+<body>
+   <div id="example"></div>
+   <script type="text/babel">
+     class Website extends React.Component{
+     constructor(props){
+            super(props);
+            this.state={
+              name:"百度",
+              site:"https://www.baidu.com"
+          }
+       this.handleClick=this.handleClick.bind(this);
+     }
+      handleClick(){
+           this.setState({
+             name:"CSDN",
+              site:"https://blog.csdn.net"
+           })
+      }
+         render(){
+            return(
+              <div>  
+                 <button onClick={this.handleClick}>{this.state.name}</button>
+                 <Name name={this.state.name} />  
+                 <Site site={this.state.site} />
+              </div>
+            );
+       }
+    }
+  
+  //子组件Name,通过this.props.name来获取父组件传递过来的数据
+      class Name extends React.Component{
+          render(){
+             return(
+               <h1>{this.props.name}</h1>
+            );
+          }
+
+     //子组件在父组件的render()方法里面更新组件，传入到了新的props
+    //判断的方式是下一个props和当前的props进行比较
+          componentWillReceiveProps(nextProps){
+              //判断一下this.props和nextProps是否相同，如果不相同才执行更新操作
+               if(this.Props!=nextProps){    
+                      alert("更新操作"+this.Props+"nextProps"+nextProps);//undefined,object
+              }
+          }
+      }
+
+//子组件Site,通过this.props.site来获取父组件传递过来的site数据
+      class Site extends React.Component{
+          render(){
+             return(
+               <h1>{this.props.site}</h1>
+            );
+          }
+     }
+
+      ReactDOM.render(
+        <Website />,
+        document.getElementById("example")
+      )
+
+</script>
+   
+   
+   
+</body>
+</html>

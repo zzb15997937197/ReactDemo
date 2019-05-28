@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>React中箭头函数的使用</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+      <!--箭头函数的使用-->
+        <script type="text/babel">
+         //1.单一参数的箭头函数
+            const  fn=foo=>'我是一个快乐的小青蛙！${foo}';  //单引号'和`都可以
+            console.log(fn('测试！'));     //我是一个快乐的小青蛙，测试！
+    
+       //2.单行函数返回一个对象字面量,注意返回的结果需要使用括号包裹，不能直接使用大括号，否则浏览器会将其解析为一个多行箭头函数
+           const ids=[1,2,3];
+           const users=ids.map((a,id)=>({a:a,content:id}))  
+ //a:1,content:0  ?结果为什么为0，1，2,a为数组里面的内容，id为数组的下标
+           console.log(users);
+
+        //3.多参数的箭头单行函数
+          const  fn1=(a,b)=>a+b;
+          console.log(fn1(1,2));  //3
+
+        //4.单参数的多行箭头函数
+           const fn2=a=>{
+            if(a=='number'){
+               console.log("number");
+            }else{
+               console.log("string");
+            }
+         }
+           fn2("1");
+         //5.多参数的多行箭头函数，与上面相比参数为2个及以上
+           const fn3=(a,b)=>{
+             if(a+b>10){
+                alert("大于10");
+             }else{
+                alert("小于等于10")
+             }
+         }
+           fn3(5,6);
+  
+      //无参数箭头函数
+           const fn4=()=>"ES6";
+           alert(fn4());
+        </script>
+   
+        <script type="text/javascript">
+          //等同于上面的const fn=foo=>foo;
+          var fn=function(foo){
+        	  return foo;
+          }
+         console.log(fn('测试'));
+        
+        </script>
+    
+
+</body>
+</html>
